@@ -1,0 +1,134 @@
+/* 导航栏容器 */
+#gpt-context-nav {
+  position: fixed;
+  /* 初始位置，会被 JS 覆盖 */
+  top: 60px;
+  right: 20px;
+  width: 260px;
+  max-height: 80vh;
+  background-color: rgba(32, 33, 35, 0.95); /* 深色背景 */
+  border: 1px solid #444;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  z-index: 9999;
+  font-family: 'Söhne', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: opacity 0.3s, height 0.3s;
+  color: #ECECF1;
+  user-select: none; /* 防止拖拽时选中文字 */
+}
+
+/* 最小化状态 */
+#gpt-context-nav.minimized {
+  width: auto;
+  min-width: 120px;
+  height: auto;
+  max-height: 40px;
+  overflow: hidden;
+}
+
+#gpt-context-nav.minimized #gpt-nav-list {
+  display: none;
+}
+
+#gpt-context-nav.minimized .nav-header {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+/* 头部区域 (可拖拽) */
+.nav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  cursor: move; /* 拖拽手势 */
+  background-color: rgba(52, 53, 65, 0.5);
+  border-bottom: 1px solid #444;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.nav-header h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #10a37f;
+  pointer-events: none; /* 防止文字影响拖拽 */
+}
+
+/* 最小化/展开按钮 */
+.toggle-btn {
+  background: transparent;
+  border: none;
+  color: #8e8ea0;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  font-size: 16px;
+  line-height: 1;
+  transition: background 0.2s;
+}
+
+.toggle-btn:hover {
+  background-color: rgba(255,255,255,0.1);
+  color: #ECECF1;
+}
+
+/* 列表容器 */
+#gpt-nav-list {
+  padding: 5px;
+  overflow-y: auto;
+  flex-grow: 1; /* 填充剩余空间 */
+}
+
+/* 列表项 */
+.gpt-nav-item {
+  display: block;
+  padding: 8px;
+  margin-bottom: 2px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #D1D5DB;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background 0.2s;
+}
+
+.gpt-nav-item:hover {
+  background-color: #40414F;
+  color: white;
+}
+
+/* 滚动条样式 */
+#gpt-nav-list::-webkit-scrollbar {
+  width: 6px;
+}
+#gpt-nav-list::-webkit-scrollbar-thumb {
+  background-color: #565869;
+  border-radius: 3px;
+}
+
+/* 适配浅色模式 */
+@media (prefers-color-scheme: light) {
+  #gpt-context-nav {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-color: #e5e5e5;
+    color: #343541;
+  }
+  .nav-header {
+    background-color: rgba(247, 247, 248, 0.8);
+    border-bottom-color: #e5e5e5;
+  }
+  .gpt-nav-item {
+    color: #343541;
+  }
+  .gpt-nav-item:hover {
+    background-color: #f7f7f8;
+  }
+}
